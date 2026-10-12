@@ -1,8 +1,8 @@
 {
   "app/api/rooms/[code]/route.ts": {
-    "mtime": 1791790120.970211,
-    "seen": 1791790767.1586566,
-    "ast_hash": "8703278ddbc9aae2731d163e786d0d5d",
+    "mtime": 1791791427.6928115,
+    "seen": 1791791458.0269644,
+    "ast_hash": "8f43e782d05c564bd02f44d3dd03a0f0",
     "semantic_hash": ""
   },
   "app/api/rooms/route.ts": {
@@ -30,9 +30,9 @@
     "semantic_hash": ""
   },
   "components/Home.tsx": {
-    "mtime": 1791790349.8619018,
-    "seen": 1791790767.1586716,
-    "ast_hash": "2276aec39248d264b3687b7165969df5",
+    "mtime": 1791791427.7132788,
+    "seen": 1791791458.026975,
+    "ast_hash": "720769b62e708183e905a569ee7eb0ea",
     "semantic_hash": ""
   },
   "components/Juice.tsx": {
@@ -96,9 +96,9 @@
     "semantic_hash": ""
   },
   "package.json": {
-    "mtime": 1791789958.8378785,
-    "seen": 1791790767.1586862,
-    "ast_hash": "ec5f501c76abd71ebf0cd24d324fc250",
+    "mtime": 1791790858.2239983,
+    "seen": 1791791458.0269868,
+    "ast_hash": "052d90c91f86d871a13e2bf7711ff5fc",
     "semantic_hash": ""
   },
   "tests/game.test.ts": {
@@ -129,6 +129,18 @@
     "mtime": 1791790782.2242017,
     "seen": 1791790791.8866043,
     "ast_hash": "98f6ce420db56d6f483e09eebbc709ec",
+    "semantic_hash": ""
+  },
+  "app/api/health/route.ts": {
+    "mtime": 1791791427.6996348,
+    "seen": 1791791458.026958,
+    "ast_hash": "16b029ac04a20af957e05c4661be9778",
+    "semantic_hash": ""
+  },
+  "vercel.json": {
+    "mtime": 1791790858.193932,
+    "seen": 1791791458.0269904,
+    "ast_hash": "4188dd8d6b745cca5d443108639b1fe2",
     "semantic_hash": ""
   }
 }

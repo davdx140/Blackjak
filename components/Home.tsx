@@ -24,11 +24,15 @@ export default function Home() {
   const [code, setCode] = useState("");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [unshared, setUnshared] = useState(false);
 
   useEffect(() => {
     const i = getIdentity();
     setId(i);
     setName(i.name);
+    api<{ storage: string }>("/api/health")
+      .then((h) => setUnshared(h.storage === "unconfigured"))
+      .catch(() => {});
   }, []);
 
   const remember = () => {
@@ -138,6 +142,9 @@ export default function Home() {
           </button>
         </form>
         {error && <div className="error">{error}</div>}
+        {unshared && (
+          <div className="warn">Multiplayer isn&apos;t set up yet: connect Upstash Redis to this Vercel project (see README).</div>
+        )}
       </motion.div>
     </main>
   );

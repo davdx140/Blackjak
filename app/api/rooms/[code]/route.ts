@@ -22,6 +22,16 @@ type Ctx = { params: Promise<{ code: string }> };
 /** Only write lastSeen this often, so a poll is usually a single read. */
 const PRESENCE_EVERY = 8_000;
 
+function notFound() {
+  // Without shared storage each serverless instance has its own memory, so
+  // tables created on one instance can't be found from another.
+  const error =
+    storageKind === "unconfigured"
+      ? "Table not found: shared storage isn't set up on this deployment (connect Upstash Redis in Vercel)"
+      : "Table not found";
+  return NextResponse.json({ error }, { status: 404 });
+}
+
 function view(room: Room) {
   return NextResponse.json(
     { room: publicView(room, Date.now()), storage: storageKind },
@@ -34,7 +44,7 @@ export async function GET(req: Request, { params }: Ctx) {
   const pid = new URL(req.url).searchParams.get("pid");
   const now = Date.now();
   const room = await loadRoom(code);
-  if (!room) return NextResponse.json({ error: "Table not found" }, { status: 404 });
+  if (!room) return notFound();
 
   // Dry-run the timers on a copy; only take the lock if something is due.
   const probe = structuredClone(room);
@@ -51,7 +61,7 @@ export async function GET(req: Request, { params }: Ctx) {
       tick(r, t);
       return true;
     });
-    return res ? view(res.room) : NextResponse.json({ error: "Table not found" }, { status: 404 });
+    return res ? view(res.room) : notFound();
   } catch {
     return view(room);
   }
@@ -102,7 +112,7 @@ export async function POST(req: Request, { params }: Ctx) {
       }
       return true;
     });
-    if (!res) return NextResponse.json({ error: "Table not found" }, { status: 404 });
+    if (!res) return notFound();
     return view(res.room);
   } catch (e) {
     const msg = e instanceof Error ? e.message : "Something went wrong";
